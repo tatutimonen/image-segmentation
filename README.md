@@ -5,7 +5,7 @@ This repository contains an implementation solving the problem of partitioning a
 <p align="center">
   <img src="img/maple.png" width="45%" height=auto alt="Original image" />
   <img src="img/maple_out.png" width="45%" height=auto alt="Partitioned image" />
-  <p align="center">Figure 1: The original image along with its optimal partitioning</p>
+  <p align="center">Figure 1: An image along with the corresponding optimal segmentation</p>
 </p>
 
 ----
