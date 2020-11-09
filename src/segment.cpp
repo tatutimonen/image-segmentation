@@ -1,5 +1,4 @@
 #include "segment.hpp"
-#include "aligned_alloc.hpp"
 
 //----------------------------------------------------------------------------
 // Auxiliary data structure for storing intermediate results along with the
