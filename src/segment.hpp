@@ -23,7 +23,7 @@ struct Result {
     float inner[3];
 };
 
-// Copmutes the utility of every possible segmentation in a brute-force manner
+// Computes the utility of every possible segmentation in a brute-force manner
 // and returns the optimal one.
 Result segment(const cv::Mat& image);
 } // namespace segment
