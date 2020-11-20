@@ -16,7 +16,11 @@ static inline double sum3(const __m256d& x)
 {
     double res = 0;
     for (int k = 0; k < 3; ++k) {
+#ifdef _WIN32
         res += x.m256d_f64[k];
+#else
+        res += x[k];
+#endif
     }
     return res;
 }
@@ -27,7 +31,7 @@ namespace segment
 {
 Result segment(const cv::Mat& image)
 {
-    using aligned_alloc::alloc, aligned_alloc::free;
+    using aligned_alloc_32::alloc, aligned_alloc_32::free;
 
     const int ny = image.rows;
     const int nx = image.cols;
@@ -118,8 +122,13 @@ Result segment(const cv::Mat& image)
                                 x0,
                                 y1,
                                 x1,
+#ifdef _WIN32
                                 {(float)b.m256d_f64[0], (float)b.m256d_f64[1], (float)b.m256d_f64[2]},
                                 {(float)a.m256d_f64[0], (float)a.m256d_f64[1], (float)a.m256d_f64[2]}
+#else
+                                {(float)b[0], (float)b[1], (float)b[2]},
+                                {(float)a[0], (float)a[1], (float)a[2]}
+#endif
                             };
                             thread_max.util = h;
                         }

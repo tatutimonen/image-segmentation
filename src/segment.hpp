@@ -1,6 +1,6 @@
 #pragma once
 
-#include "aligned_alloc.hpp"
+#include "aligned_alloc_32.hpp"
 
 #include "opencv2/imgproc.hpp"
 
