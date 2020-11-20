@@ -50,27 +50,21 @@ Result segment(const cv::Mat& image)
         }
     }
 
-    // Cumulate row-wise sums.
-    __m256d* cum_row_sums = alloc((ny+1)*(nx+1));
-    for (int j = 0; j < nx+1; ++j) {
-        cum_row_sums[j] = _mm256_setzero_pd();
-    }
-    #pragma omp parallel for
-    for (int i = 1; i < ny+1; ++i) {
-        cum_row_sums[i*(nx+1)] = _mm256_setzero_pd();
-        for (int j = 0; j < nx; ++j) {
-            cum_row_sums[i*(nx+1) + j+1] = _mm256_add_pd(cum_row_sums[i*(nx+1) + j], data_vec[(i-1)*nx + j]);
-        }
-    }
-
     // Create a summed-area table to enable computing arbitrary rectangles in O(1) time.
     __m256d* sum_table = alloc((ny+1)*(nx+1));
     for (int j = 0; j < nx+1; ++j) {
         sum_table[j] = _mm256_setzero_pd();
     }
+    #pragma omp parallel for
+    for (int i = 1; i < ny+1; ++i) {
+        sum_table[i*(nx+1)] = _mm256_setzero_pd();
+        for (int j = 0; j < nx; ++j) {
+            sum_table[i*(nx+1) + j+1] = _mm256_add_pd(sum_table[i*(nx+1) + j], data_vec[(i-1)*nx + j]);
+        }
+    }
     for (int i = 1; i < ny+1; ++i) {
         for (int j = 0; j < nx+1; ++j) {
-            sum_table[i*(nx+1) + j] = _mm256_add_pd(sum_table[(i-1)*(nx+1) + j], cum_row_sums[i*(nx+1) + j]);
+            sum_table[i*(nx+1) + j] = _mm256_add_pd(sum_table[(i-1)*(nx+1) + j], sum_table[i*(nx+1) + j]);
         }
     }
     auto last = sum_table[ny*(nx+1) + nx];
@@ -143,7 +137,6 @@ Result segment(const cv::Mat& image)
     }
 
     free(data_vec);
-    free(cum_row_sums);
     free(sum_table);
 
     return global_max.res;
