@@ -31,7 +31,8 @@ namespace segment
 {
 Result segment(const cv::Mat& image)
 {
-    using aligned_alloc_32::alloc, aligned_alloc_32::free;
+    using aligned_alloc_32::alloc;
+    using aligned_alloc_32::free;
 
     const int ny = image.rows;
     const int nx = image.cols;

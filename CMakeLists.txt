@@ -22,6 +22,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if(NOT MSVC)
+    add_compile_options("-march=native")
+endif()
+
 find_package(OpenCV REQUIRED)
 find_package(OpenMP REQUIRED)
 
