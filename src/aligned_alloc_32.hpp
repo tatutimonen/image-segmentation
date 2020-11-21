@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <new>
 
 extern "C" {
 #include <immintrin.h>
