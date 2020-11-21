@@ -7,11 +7,11 @@ __m256d* alloc(std::size_t size)
 #ifdef _WIN32
     return (__m256d*)_aligned_malloc(sizeof(__m256d)*size, sizeof(__m256d));
 #else
-    void* p = nullptr;
-    if (posix_memalign(&p, sizeof(__m256d), sizeof(__m256d)*size)) {
+    void* ptr = nullptr;
+    if (posix_memalign(&ptr, sizeof(__m256d), sizeof(__m256d)*size)) {
         throw std::bad_alloc();
     }
-    return (__m256d*)p;
+    return (__m256d*)ptr;
 #endif
 }
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cstdlib>
+#ifndef _WIN32
 #include <new>
+#endif
 
 extern "C" {
 #include <immintrin.h>
