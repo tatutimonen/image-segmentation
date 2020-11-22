@@ -16,7 +16,7 @@ if(NOT DEFINED OpenCV_DIR)
                          variable or pass it straight to CMake.")
 endif()
 
-project("image-segmentation")
+project(image-segmentation)
 
 set(CMAKE_CXX_STANDARD          17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
