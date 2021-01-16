@@ -92,28 +92,28 @@ namespace Segment {
                         for (int x1 = dx; x1 < nx+1; ++x1) {
                             int x0 = x1 - dx;
                             auto vx = _mm256_add_pd(
-                                        _mm256_sub_pd(
-                                            _mm256_sub_pd(
-                                                sum_table[y1*(nx+1) + x1],
-                                                sum_table[y1*(nx+1) + x0]
-                                            ),
-                                            sum_table[y0*(nx+1) + x1]
-                                        ),
-                                        sum_table[y0*(nx+1) + x0]
-                                    );
+                                          _mm256_sub_pd(
+                                              _mm256_sub_pd(
+                                                  sum_table[y1*(nx+1) + x1],
+                                                  sum_table[y1*(nx+1) + x0]
+                                              ),
+                                              sum_table[y0*(nx+1) + x1]
+                                          ),
+                                          sum_table[y0*(nx+1) + x0]
+                                      );
                             auto h4 = _mm256_add_pd(
-                                        _mm256_mul_pd(
-                                            _mm256_add_pd(
-                                                _mm256_mul_pd(
-                                                    vx,
-                                                    A
-                                                ),
-                                                B
-                                            ),
-                                            vx
-                                        ),
-                                        C
-                                    );
+                                          _mm256_mul_pd(
+                                              _mm256_add_pd(
+                                                  _mm256_mul_pd(
+                                                      vx,
+                                                      A
+                                                  ),
+                                                  B
+                                              ),
+                                              vx
+                                          ),
+                                          C
+                                      );
                             auto a = _mm256_mul_pd(vx, card_X_inv);
                             auto b = _mm256_mul_pd(_mm256_sub_pd(last, vx), card_Y_inv);
                             double h = sum3(h4);
