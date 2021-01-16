@@ -16,11 +16,11 @@ static inline double sum3(const __m256d& x)
 {
     double res = 0;
     for (int k = 0; k < 3; ++k) {
-#ifdef _WIN32
+    #ifdef _WIN32
         res += x.m256d_f64[k];
-#else
+    #else
         res += x[k];
-#endif
+    #endif
     }
     return res;
 }
