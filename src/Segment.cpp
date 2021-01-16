@@ -123,13 +123,13 @@ namespace Segment {
                                     x0,
                                     y1,
                                     x1,
-                                #ifdef _WIN32
+                                    #ifdef _WIN32
                                     { (float)b.m256d_f64[0], (float)b.m256d_f64[1], (float)b.m256d_f64[2] },
                                     { (float)a.m256d_f64[0], (float)a.m256d_f64[1], (float)a.m256d_f64[2] }
-                                #else
+                                    #else
                                     { (float)b[0], (float)b[1], (float)b[2] },
                                     { (float)a[0], (float)a[1], (float)a[2] }
-                                #endif
+                                    #endif
                                 };
                                 thread_max.util = h;
                             }
