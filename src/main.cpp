@@ -1,4 +1,4 @@
-#include "segment.hpp"
+#include "Segment.hpp"
 
 #include "opencv2/highgui.hpp"
 
@@ -18,7 +18,7 @@ int main(int argc, char* const* argv)
 
     std::cout << "Segmenting...\n";
     auto t0 = std::chrono::high_resolution_clock::now();
-    auto r = segment::segment(img_in);
+    auto r = Segment::segment(img_in);
     auto t1 = std::chrono::high_resolution_clock::now();
     auto time_taken = std::chrono::duration_cast<std::chrono::duration<double>>(t1 - t0);
     std::cout << "Took " << std::setprecision(2) << time_taken.count() << " seconds, writing results...\n";

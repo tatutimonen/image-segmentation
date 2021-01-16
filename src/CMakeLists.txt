@@ -1,7 +1,7 @@
 add_executable(App
     main.cpp
-    aligned_alloc_32.cpp
-    segment.cpp
+    AlignedAlloc32.cpp
+    Segment.cpp
 )
 target_include_directories(App 
     PUBLIC ${OpenCV_INCLUDE_DIRS}
