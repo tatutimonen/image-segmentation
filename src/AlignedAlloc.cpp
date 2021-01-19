@@ -1,6 +1,6 @@
-#include "AlignedAlloc32.hpp"
+#include "AlignedAlloc.hpp"
 
-namespace AlignedAlloc32 {
+namespace AlignedAlloc {
     
     __m256d* alloc(std::size_t size)
     {
@@ -24,4 +24,4 @@ namespace AlignedAlloc32 {
     #endif
     }
 
-} // namespace AlignedAlloc32
+} // namespace AlignedAlloc

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "AlignedAlloc32.hpp"
+#include "AlignedAlloc.hpp"
 
-#include "opencv2/imgproc.hpp"
+#include <opencv2/imgproc.hpp>
 
 extern "C" {
 #include <omp.h>

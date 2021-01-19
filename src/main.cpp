@@ -1,6 +1,6 @@
 #include "Segment.hpp"
 
-#include "opencv2/highgui.hpp"
+#include <opencv2/highgui.hpp>
 
 #include <iostream>
 #include <iomanip>
