@@ -1,6 +1,6 @@
 add_executable(App
     main.cpp
-    AlignedAlloc32.cpp
+    AlignedAlloc.cpp
     Segment.cpp
 )
 target_include_directories(App 
