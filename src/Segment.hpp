@@ -10,11 +10,12 @@ extern "C" {
 
 //----------------------------------------------------------------------------
 
-namespace Segment {
-
+namespace Segment
+{
     // Data structure storing the two defining cornerpoints of the rectangle, along
     // with its color and the color of the background.
-    struct Result {
+    struct Result
+    {
         int y0;
         int x0;
         int y1;
@@ -26,7 +27,7 @@ namespace Segment {
     // Computes the utility of every possible segmentation in a brute-force manner
     // and returns the optimal one.
     Result segment(const cv::Mat& image);
-
+    
 } // namespace Segment
 
 //----------------------------------------------------------------------------
