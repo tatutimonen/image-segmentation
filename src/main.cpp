@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <chrono>
 
+//----------------------------------------------------------------------------
+
 int main(int argc, char* const* argv)
 {
     if (argc != 3)
@@ -36,3 +38,5 @@ int main(int argc, char* const* argv)
 
     return 0;
 }
+
+//----------------------------------------------------------------------------
