@@ -1,6 +1,6 @@
 ## Image Segmentation
 
-A CLI tool that partitions an image into a monochromatic rectangle -and background such that the sum of squared errors between the original and segmented image is minimized. [OpenMP](https://www.openmp.org/) and [Intel Intrinsics](https://software.intel.com/sites/landingpage/IntrinsicsGuide/) are utilized to accelerate computations. This work is related to a course assignment from the Aalto University course *Programming Parallel Computers*. The course homepage can be found [here](https://ppc.cs.aalto.fi/).
+A CLI tool that partitions an image into a monochromatic rectangle -and background such that the sum of squared errors between the original and segmented image is minimized. [OpenMP](https://www.openmp.org/) and [Intel Intrinsics](https://software.intel.com/sites/landingpage/IntrinsicsGuide/) are utilized to accelerate computations. This work is related to an assignment from the Aalto University course *Programming Parallel Computers*. The course homepage can be found [here](https://ppc.cs.aalto.fi/).
 
 <p align="center">
   <img src="img/maple.png" width="45%" height=auto alt="Original image" />
