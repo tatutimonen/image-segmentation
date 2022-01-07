@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AlignedAlloc.hpp"
+#include "aligned_alloc.hpp"
 
 #include <opencv2/imgproc.hpp>
 
@@ -10,7 +10,7 @@ extern "C" {
 
 //----------------------------------------------------------------------------
 
-namespace Segment
+namespace segment
 {
     
 // Data structure storing the two defining cornerpoints of the rectangle, along
@@ -28,6 +28,6 @@ struct Result {
 // and returns the optimal one.
 Result segment(const cv::Mat& image);
 
-} // namespace Segment
+} // namespace segment
 
 //----------------------------------------------------------------------------

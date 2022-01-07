@@ -1,11 +1,11 @@
-#include "Segment.hpp"
+#include "segment.hpp"
 
 //----------------------------------------------------------------------------
 // Auxiliary data structure for storing intermediate results along with the
 // corresponding utility.
 
 struct ResultAux {
-    Segment::Result res;
+    segment::Result res;
     double util;
 };
 
@@ -28,13 +28,13 @@ static inline double sum3(const __m256d& x)
 
 //----------------------------------------------------------------------------
 
-namespace Segment
+namespace segment
 {
 
 Result segment(const cv::Mat& image)
 {
-    using AlignedAlloc::alloc;
-    using AlignedAlloc::free;
+    using aligned_alloc::alloc;
+    using aligned_alloc::free;
 
     const int ny = image.rows;
     const int nx = image.cols;
@@ -155,6 +155,6 @@ Result segment(const cv::Mat& image)
     return globalMax.res;
 }
 
-} // namespace Segment
+} // namespace segment
 
 //----------------------------------------------------------------------------

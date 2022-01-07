@@ -1,4 +1,4 @@
-#include "Segment.hpp"
+#include "segment.hpp"
 
 #include <opencv2/highgui.hpp>
 
@@ -23,7 +23,7 @@ int main(int argc, char* const* argv)
 
     using namespace std::chrono_literals;
     const auto t0 = std::chrono::high_resolution_clock::now();
-    const auto r = Segment::segment(imgIn);
+    const auto r = segment::segment(imgIn);
     const auto t1 = std::chrono::high_resolution_clock::now();
     const auto timeTaken = std::chrono::duration_cast<std::chrono::duration<double>>(t1 - t0);
     

@@ -1,8 +1,8 @@
-#include "AlignedAlloc.hpp"
+#include "aligned_alloc.hpp"
 
 //----------------------------------------------------------------------------
 
-namespace AlignedAlloc
+namespace aligned_alloc
 {
 
 __m256d* alloc(std::size_t size)
@@ -11,9 +11,8 @@ __m256d* alloc(std::size_t size)
     return (__m256d*)_aligned_malloc(sizeof(__m256d)*size, sizeof(__m256d));
     #else
     void* ptr = nullptr;
-    if (posix_memalign(&ptr, sizeof(__m256d), sizeof(__m256d)*size)) {
+    if (posix_memalign(&ptr, sizeof(__m256d), sizeof(__m256d)*size))
         throw std::bad_alloc();
-    }
     return (__m256d*)ptr;
     #endif
 }
@@ -27,6 +26,6 @@ void free(__m256d* ptr)
     #endif
 }
 
-} // namespace AlignedAlloc
+} // namespace aligned_alloc
 
 //----------------------------------------------------------------------------

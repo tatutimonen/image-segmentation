@@ -14,13 +14,13 @@ extern "C" {
 
 //----------------------------------------------------------------------------
 
-namespace AlignedAlloc
+namespace aligned_alloc
 {
 
 __m256d* alloc(size_t size);
 
 void free(__m256d* ptr);
 
-} // namespace AlignedAlloc
+} // namespace aligned_alloc
 
 //----------------------------------------------------------------------------
