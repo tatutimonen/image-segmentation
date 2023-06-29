@@ -1,10 +1,12 @@
 #include "segment.hpp"
 
-//----------------------------------------------------------------------------
-// Auxiliary data structure for storing intermediate results along with the
-// corresponding utility.
+#include <vector>
 
-struct ResultAux {
+//----------------------------------------------------------------------------
+// Stores intermediate results along with the corresponding utility.
+
+struct ResultAux
+{
     segment::Result res;
     double util;
 };
@@ -17,11 +19,11 @@ static inline double sum3(const __m256d& x)
     double res = 0;
     for (int k = 0; k < 3; ++k)
     {
-        #ifdef _WIN32
+#ifdef _WIN32
         res += x.m256d_f64[k];
-        #else
+#else
         res += x[k];
-        #endif
+#endif
     }
     return res;
 }
@@ -31,17 +33,17 @@ static inline double sum3(const __m256d& x)
 namespace segment
 {
 
+//----------------------------------------------------------------------------
+
 Result segment(const cv::Mat& image)
 {
-    using aligned_alloc::alloc;
-    using aligned_alloc::free;
-
     const int ny = image.rows;
     const int nx = image.cols;
     const int nc = image.channels();
 
     // Vectorize and rescale the data.
-    __m256d* dataVec = alloc(ny*nx);
+    std::vector<__m256d> dataVec;
+    dataVec.resize(ny * nx);
 
     #pragma omp parallel for
     for (int i = 0; i < ny; ++i)
@@ -50,16 +52,17 @@ Result segment(const cv::Mat& image)
         int readIdx = i*nx*nc + j*nc;
         int writeIdx = i*nx + j;
         dataVec[writeIdx] = _mm256_set_pd(
-                                0.0,                     // A
-                                image.data[readIdx + 0], // B
-                                image.data[readIdx + 1], // G
-                                image.data[readIdx + 2]  // R
-                            );
+            0.0,                     // A
+            image.data[readIdx + 0], // B
+            image.data[readIdx + 1], // G
+            image.data[readIdx + 2]  // R
+        );
         dataVec[writeIdx] = _mm256_div_pd(dataVec[writeIdx], _mm256_set1_pd(255.0));
     }
 
     // Create a summed-area table to enable computing arbitrary rectangles in O(1) time.
-    __m256d* sumTable = alloc((ny+1)*(nx+1));
+    std::vector<__m256d> sumTable;
+    sumTable.resize((ny+1) * (nx+1));
 
     for (int j = 0; j < nx+1; ++j)
         sumTable[j] = _mm256_setzero_pd();
@@ -126,13 +129,13 @@ Result segment(const cv::Mat& image)
                             x0,
                             y1,
                             x1,
-                            #ifdef _WIN32
+#ifdef _WIN32
                             { (float)b.m256d_f64[0], (float)b.m256d_f64[1], (float)b.m256d_f64[2] },
                             { (float)a.m256d_f64[0], (float)a.m256d_f64[1], (float)a.m256d_f64[2] }
-                            #else
+#else
                             { (float)b[0], (float)b[1], (float)b[2] },
                             { (float)a[0], (float)a[1], (float)a[2] }
-                            #endif
+#endif
                         };
                         threadMax.util = h;
                     }
@@ -149,12 +152,11 @@ Result segment(const cv::Mat& image)
         }
     }
 
-    free(dataVec);
-    free(sumTable);
-
     return globalMax.res;
 }
 
-} // namespace segment
+//----------------------------------------------------------------------------
+
+}  // namespace segment
 
 //----------------------------------------------------------------------------

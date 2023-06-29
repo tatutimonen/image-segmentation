@@ -32,7 +32,7 @@ int main(int argc, char* const* argv)
     const cv::Mat imgOut = cv::Mat(imgIn.size(), CV_32FC3, cv::Scalar(r.outer[2], r.outer[1], r.outer[0]));
     cv::rectangle(imgOut, cv::Point(r.x0, r.y0), cv::Point(r.x1, r.y1),
                   cv::Scalar(r.inner[2], r.inner[1], r.inner[0]), cv::FILLED);
-    cv::imwrite(outputPath, imgOut*255.0);
+    cv::imwrite(outputPath, imgOut * 255.0);
 
     std::cout << "Done." << std::endl;
 

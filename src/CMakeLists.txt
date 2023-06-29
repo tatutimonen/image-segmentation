@@ -1,6 +1,5 @@
 add_executable(App
     main.cpp
-    aligned_alloc.cpp
     segment.cpp
 )
 target_include_directories(App 
