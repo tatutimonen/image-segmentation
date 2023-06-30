@@ -42,8 +42,7 @@ Result segment(const cv::Mat& image)
     const int nc = image.channels();
 
     // Vectorize and rescale the data.
-    std::vector<__m256d> dataVec;
-    dataVec.resize(ny * nx);
+    std::vector<__m256d> dataVec(ny * nx);
 
     #pragma omp parallel for
     for (int i = 0; i < ny; ++i)
@@ -61,8 +60,7 @@ Result segment(const cv::Mat& image)
     }
 
     // Create a summed-area table to enable computing arbitrary rectangles in O(1) time.
-    std::vector<__m256d> sumTable;
-    sumTable.resize((ny+1) * (nx+1));
+    std::vector<__m256d> sumTable((ny+1) * (nx+1));
 
     for (int j = 0; j < nx+1; ++j)
         sumTable[j] = _mm256_setzero_pd();
